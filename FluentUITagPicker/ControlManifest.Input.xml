@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <control namespace="DR" constructor="FluentUITagPicker" version="0.0.2" display-name-key="FluentUITagPicker" description-key="FluentUITagPicker description" control-type="standard" >
+    <external-service-usage enabled="false">
+    </external-service-usage>
+    <data-set name="tagsDataSet" display-name-key="Tags Dataset">
+      <property-set name="tagLabel" display-name-key="Tag Label" description-key="Text of the tag (Bound Column). Optional, set only if different than PrimaryName column" of-type="SingleLine.Text" usage="bound" required="false" />
+    </data-set>
+
+    <property name="showRecordImage" display-name-key="Show Record Image" description-key="Show the record image beside the text." of-type="Enum" usage="input" required="true">
+      <value name="false" display-name-key="false" description-key="False" default="true">false</value>
+      <value name="true" display-name-key="true" description-key="True">true</value>     
+    </property>
+
+    <resources>
+      <code path="index.ts" order="1"/>
+      <!-- UNCOMMENT TO ADD MORE RESOURCES
+      <css path="css/FluentUITagPicker.css" order="1" />
+      <resx path="strings/FluentUITagPicker.1033.resx" version="1.0.0" />
+      -->
+    </resources>
+    <feature-usage>
+      <uses-feature name="Utility" required="true" />
+      <uses-feature name="WebAPI" required="true" />
+    </feature-usage>
+  </control>
+</manifest>
