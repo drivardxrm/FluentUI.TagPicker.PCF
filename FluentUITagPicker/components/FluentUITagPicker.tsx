@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useState, useMemo, useEffect } from 'react'
 import { usePcfContext } from '../services/PcfContext'
 import { Image, Spinner, Tag, TagPicker, TagPickerControl, TagPickerGroup, TagPickerInput, TagPickerList, TagPickerOption, TagPickerProps, useTagPickerFilter } from '@fluentui/react-components'
-import { ChevronDown20Regular } from '@fluentui/react-icons';
+import { ChevronDown20Regular, DismissRegular } from '@fluentui/react-icons';
 import { useStyles } from '../styles/Styles'
 import { useTagPickerOptions } from '../hooks/useRecords';
 
@@ -11,7 +11,7 @@ const FluentUITagPicker = ():JSX.Element => {
   const { options, status, isFetching} = useTagPickerOptions()
   const [query, setQuery] = useState<string>("");
   const [selectedOptions, setSelectedOptions] = React.useState<string[]>(pcfcontext.context.parameters.tagsDataSet.sortedRecordIds);
-  const [commitedOptions, seComitedOptions] = React.useState<string[]>(pcfcontext.context.parameters.tagsDataSet.sortedRecordIds);
+  const [commitedOptions, setComitedOptions] = React.useState<string[]>(pcfcontext.context.parameters.tagsDataSet.sortedRecordIds);
   const [isFocused, setIsFocused] = useState(false);
   const styles = useStyles()
 
@@ -38,6 +38,8 @@ const FluentUITagPicker = ():JSX.Element => {
     setQuery('')
   };
 
+ 
+
   useEffect(
     () => {
         if (selectedOptions !== commitedOptions) {
@@ -50,7 +52,9 @@ const FluentUITagPicker = ():JSX.Element => {
             optionsToDissacociate.forEach(option => {
                 pcfcontext.disAssociateRecord(pcfcontext.targetEntityName, pcfcontext.targetEntityId, option, pcfcontext.relationshipName)
             })
-            seComitedOptions(selectedOptions)
+            setComitedOptions(selectedOptions)
+
+            
         }
     }
     , [selectedOptions])
@@ -120,10 +124,10 @@ const FluentUITagPicker = ():JSX.Element => {
                     {selectedOptions.map((optionToRender) => (
                         <Tag
                             key={optionToRender}
-                            className={styles.tag}
                             shape={'rounded'}
                             size={'medium'}
                             appearance={'brand'} // todo parametrize
+                            dismissIcon={<DismissRegular className={styles.icon12}/>}
                             media={
                                 options.find((option) => option.id === optionToRender)?.imagesrc &&
                                 <Image

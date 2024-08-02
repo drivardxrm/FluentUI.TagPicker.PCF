@@ -30,33 +30,19 @@ export class PcfContextService {
   constructor (props?:IPcfContextServiceProps) {
     if (props) {
       this.instanceid = props.instanceid
-      this.relatedEntityName = props.context.parameters.tagsDataSet.getTargetEntityType()
-      this.context = props.context
       this.dataset = props.context.parameters.tagsDataSet
-      this.showRecordImage = props.context.parameters.showRecordImage.raw === 'true'
-
-      this.relationshipName = (this.context as any).navigation._customControlProperties.descriptor.Parameters.RelationshipName
-      this.viewid = (this.context as any).navigation._customControlProperties.descriptor.Parameters.ViewId
-
+      this.context = props.context
       this.targetEntityName = (<any>this.context.mode).contextInfo.entityTypeName
       this.targetEntityId   = (<any>this.context.mode).contextInfo.entityId
-      console.log(this.targetEntityName)
-      console.log(this.targetEntityId)
+      this.relatedEntityName = props.context.parameters.tagsDataSet.getTargetEntityType()
+      this.relationshipName = (<any>this.context).navigation._customControlProperties.descriptor.Parameters.RelationshipName
+      this.viewid = (this.context as any).navigation._customControlProperties.descriptor.Parameters.ViewId
+      this.showRecordImage = props.context.parameters.showRecordImage.raw === 'true'
+
+      // console.log(this.targetEntityName)
+      // console.log(this.targetEntityId)
     }
   }
-
-
-  
-  tagValues():iTagInfo[] {
-    return this.dataset?.sortedRecordIds.map((recordId) => {
-      const currentRecord = this.dataset?.records[recordId]  
-      return {
-        id: recordId ?? '',
-        name: currentRecord?.getFormattedValue('tagLabel') ?? '',
-      }
-    }) ?? []
-  }
-
 
   async getEntityMetadata (entityname:string) : Promise<ComponentFramework.PropertyHelper.EntityMetadata> {
     return this.context.utils.getEntityMetadata(entityname)
@@ -75,22 +61,11 @@ export class PcfContextService {
       .retrieveRecord('savedquery', this.viewid, '?$select=returnedtypecode,fetchxml')
   }
 
-  // Returns all strings between curly braces in custom text
-  // CustomTextAttributes ():string[] {
-  //   // eslint-disable-next-line no-useless-escape
-  //   return this.context.parameters.customtext.raw?.match(/[^{\}]+(?=})/g) ?? []
-  // }
+
 
    // Get the list of fields to fetch
    getAttributes (primaryid:string, primaryname:string, primaryimage:string):string[] {
     const attributes:string[] = [primaryid, primaryname] // primaryid and primaryname is always fetched
-
-    // add custom text attributes if needed
-    // this.CustomTextAttributes().forEach(attribute => {
-    //   if (!attributes.includes(attribute)) {
-    //     attributes.push(attribute)
-    //   }
-    // })
 
     // add primaryimage if needed
     if (this.showRecordImage) {
@@ -128,22 +103,9 @@ export class PcfContextService {
   }
 
   getRecordText (record:ComponentFramework.WebApi.Entity, primaryname:string):string {
-    // Default = record primaryname
-    //if (!this.customText) {
+
       return record[`${primaryname}`]
-    // } else {
-    //   // Custom text
-    //   let customtext = this.customText;
-    //     this.CustomTextAttributes().forEach(attribute => {
-    //       // check if there is a formated value for the attribute (ex. Choice, Date, Lookup etc)
-    //       const formatedValue = record[`${attribute}@OData.Community.Display.V1.FormattedValue`] ??
-    //                             record[`_${attribute}_value@OData.Community.Display.V1.FormattedValue`] ??
-    //                             record[`${attribute}`]
-    //       customtext = this.replaceAll(customtext!, `{${attribute}}`, formatedValue ?? '')
-    //     })
-  
-    //     return customtext
-    // }
+
   }
 
   async associateRecord (targetEntity:string, targetEntityId:string, relatedEntity:string, relatedEntityId:string, relationshipName:string):Promise<void> {
@@ -156,7 +118,7 @@ export class PcfContextService {
       getMetadata: function () { return { boundParameter: null, parameterTypes: {}, operationType: 2, operationName: "Associate" }; }
     };
 
-    const response = await (this.context.webAPI as any).execute(associateRequest)
+    const response = await (<any>this.context.webAPI).execute(associateRequest)
     return response
   }
 
@@ -168,34 +130,8 @@ export class PcfContextService {
       getMetadata: function () { return { boundParameter: null, parameterTypes: {}, operationType: 2, operationName: "Disassociate" }; }
     };
 
-    const response = await (this.context.webAPI as any).execute(disassociateRequest)
+    const response = await (<any>this.context.webAPI).execute(disassociateRequest)
     return response
   }
-
-  // async openRecord (entityName:string,entityId:string):Promise<ComponentFramework.NavigationApi.OpenFormSuccessResponse> {
-  //   return this.context.navigation.openForm(
-  //     {
-  //       entityName: entityName,
-  //       entityId: entityId
-  //     }
-  //   )
-  // }
 }
 
-
-// var disassociateRequest = {
-// 	target: { entityType: "opportunity", id: "1b59bdd6-0ce1-4dd6-9631-00e9c958ee5c" },
-// 	relatedEntityId : "ce26f03d-ba3f-ef11-a316-000d3af4e7b2",
-// 	relationship: "bhvr_Platform_Opportunity",
-// 	getMetadata: function () { return { boundParameter: null, parameterTypes: {}, operationType: 2, operationName: "Disassociate" }; }
-// };
-
-// Xrm.WebApi.execute(disassociateRequest).then(
-// 	function success(response) {
-// 		if (response.ok) {
-// 			console.log("Success");
-// 		}
-// 	}
-// ).catch(function (error) {
-// 	console.log(error.message);
-// });

@@ -1,28 +1,17 @@
-import { makeStyles,  tokens } from '@fluentui/react-components';
+import { makeStyles } from '@fluentui/react-components';
 
 export const useStyles = makeStyles({
 
   tagPickerContainer: {
+    paddingTop: '3px',
     minWidth: '200px',
-    maxWidth: '400px',
+    //maxWidth: '400px',  // todo parametrize ??
   },
   tagPickerControl: {
-    // minWidth: '200px',
-    // maxWidth: '400px',
     paddingLeft: '3px',
   },
-//   tagPickerControlEmpty: {
-//     paddingLeft: '10px',
-//   },
   tagPickerGroup: {
     padding: '0 0 0 0',
-  },
-  
-  tagPickerGroupVisible: {
-    display: 'block'
-  },
-  tagPickerGroupHidden: {
-    display: 'none'
   },
   tagPickerInput: {
    padding: '0 0 0 0'
@@ -31,12 +20,7 @@ export const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center' /* This centers the content vertically */
   },
-//   clearButton: {
-//     paddingLeft: '0',
-//     paddingRight: '0',
-//     minWidth: '10px'
-//   },
-  
+
   elementVisible: {
     visibility: 'visible'
   },
@@ -44,23 +28,14 @@ export const useStyles = makeStyles({
     visibility: 'hidden',
     display: 'none'     // gives back the space
   },
-//   icon12: { fontSize: "12px" },
-//   tagSelected: {
-//      backgroundColor: tokens.colorNeutralBackground1Selected,
-//   },
-  tagpicker: {
-    //height: '32px',
-  },
-  tag: {
-    //border: 'none'
-  },
+
   tagOverflow: {
     whiteSpace: 'nowrap', /* Prevents the text from wrapping to the next line */
     overflow: 'hidden', /* Hides the overflow text */
     textOverflow: 'ellipsis', /* Adds an ellipsis to indicate text cut off */
   },
-//   tagOverflowLink: {
-//     maxWidth: '100%',
-//     display: 'inline-block',
-//   },
+  icon12: {
+    fontSize: '12px'
+  }
+
 });
