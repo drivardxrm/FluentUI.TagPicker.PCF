@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useState, useMemo, useEffect } from 'react'
 import { usePcfContext } from '../services/PcfContext'
 import { Image, Spinner, Tag, TagPicker, TagPickerControl, TagPickerGroup, TagPickerInput, TagPickerList, TagPickerOption, TagPickerProps, useTagPickerFilter } from '@fluentui/react-components'
-import { ChevronDown20Regular, DismissRegular } from '@fluentui/react-icons';
+import { ChevronDown20Regular, DismissFilled } from '@fluentui/react-icons';
 import { useStyles } from '../styles/Styles'
 import { useTagPickerOptions } from '../hooks/useRecords';
 
@@ -127,7 +127,7 @@ const FluentUITagPicker = ():JSX.Element => {
                             shape={'rounded'}
                             size={'medium'}
                             appearance={'brand'} // todo parametrize
-                            dismissIcon={<DismissRegular className={styles.icon12}/>}
+                            dismissIcon={<DismissFilled className={styles.icon12}/>}
                             media={
                                 options.find((option) => option.id === optionToRender)?.imagesrc &&
                                 <Image
