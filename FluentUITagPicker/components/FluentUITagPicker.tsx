@@ -1,35 +1,20 @@
 import * as React from 'react'
-import { useEffect, useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { usePcfContext } from '../services/PcfContext'
-import { Button, Image, Link, Spinner, Tag, TagPicker, TagPickerControl, TagPickerGroup, TagPickerInput, TagPickerList, TagPickerOption, TagPickerProps, mergeClasses, useTagPickerFilter } from '@fluentui/react-components'
-import { ChevronDown20Regular, DismissRegular } from '@fluentui/react-icons';
-import { useDatasetView } from '../hooks/useDatasetView'
+import { Image, Spinner, Tag, TagPicker, TagPickerControl, TagPickerGroup, TagPickerInput, TagPickerList, TagPickerOption, TagPickerProps, useTagPickerFilter } from '@fluentui/react-components'
+import { ChevronDown20Regular } from '@fluentui/react-icons';
 import { useStyles } from '../styles/Styles'
 import { useTagPickerOptions } from '../hooks/useRecords';
-
-
-
-
-// export interface ITagPickerProps{
-//   entity: string;
-// }
 
 const FluentUITagPicker = ():JSX.Element => {
   const pcfcontext = usePcfContext()
   const { options, status, isFetching} = useTagPickerOptions()
   const [query, setQuery] = useState<string>("");
-//   const [selectedOption, setSelectedOption] = useState<
-//     string | undefined
-//   >(pcfcontext.context.parameters.tagsDataSet.sortedRecordIds[0] ?? undefined); // todo 
-  
   const [selectedOptions, setSelectedOptions] = React.useState<string[]>(pcfcontext.context.parameters.tagsDataSet.sortedRecordIds);
+  const [commitedOptions, seComitedOptions] = React.useState<string[]>(pcfcontext.context.parameters.tagsDataSet.sortedRecordIds);
   const [isFocused, setIsFocused] = useState(false);
-  const [isInputFocused, setInputFocused] = useState(false);
   const styles = useStyles()
 
-
-
-  
 
   const placeholder = useMemo(
     () => selectedOptions.length === 0 ? '---' : '',
@@ -38,29 +23,37 @@ const FluentUITagPicker = ():JSX.Element => {
 
   const handleBlur = () => {
     setQuery('')
-    setInputFocused(false)
   };
-
-
 
   const handleOnChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-    setInputFocused(e.target.value != ''); // if there is a value in the input, set to true (will hide the selected tag)
     setQuery(e.target.value)    
   };
-
-
-
 
   const onOptionSelect: TagPickerProps["onOptionSelect"] = (e, data) => {
     if (data.value === 'no-matches') {
       setQuery('')
-      setInputFocused(false)
-      return;
+      return
     }
     setSelectedOptions(data.selectedOptions)
-    setQuery('');
-    setInputFocused(false);
+    setQuery('')
   };
+
+  useEffect(
+    () => {
+        if (selectedOptions !== commitedOptions) {
+            const optionsToAssociate = selectedOptions.filter(option => !commitedOptions.includes(option));
+            optionsToAssociate.forEach(option => {
+                pcfcontext.associateRecord(pcfcontext.targetEntityName, pcfcontext.targetEntityId, pcfcontext.relatedEntityName, option, pcfcontext.relationshipName)
+            })
+
+            const optionsToDissacociate = commitedOptions.filter(option => !selectedOptions.includes(option));
+            optionsToDissacociate.forEach(option => {
+                pcfcontext.disAssociateRecord(pcfcontext.targetEntityName, pcfcontext.targetEntityId, option, pcfcontext.relationshipName)
+            })
+            seComitedOptions(selectedOptions)
+        }
+    }
+    , [selectedOptions])
 
   const children = useTagPickerFilter({
     query,
@@ -94,6 +87,7 @@ const FluentUITagPicker = ():JSX.Element => {
     ),
 
     filter: (option) =>
+      !selectedOptions.includes(option) &&
       (options.find((o) => o.id === option)?.displaytext.toLowerCase().includes(query.toLowerCase()) ?? false)
   });
 
@@ -106,7 +100,7 @@ const FluentUITagPicker = ():JSX.Element => {
     return <div>{pcfcontext.context.resources.getString('Error fetching data...') || 'Error fetching data...'}</div>
   } else {
     return (
-      <div className={styles.tagpicker}>
+      <div className={styles.tagPickerContainer}>
         {options && (
           <TagPicker
             onOptionSelect={onOptionSelect}
@@ -121,9 +115,7 @@ const FluentUITagPicker = ():JSX.Element => {
             >
         
                 <TagPickerGroup 
-                    className={mergeClasses(
-                    styles.tagPickerGroup, 
-                    isInputFocused ? styles.tagPickerGroupHidden : styles.tagPickerGroupVisible)}
+                    className={styles.tagPickerGroup}
                 >
                     {selectedOptions.map((optionToRender) => (
                         <Tag
@@ -131,7 +123,7 @@ const FluentUITagPicker = ():JSX.Element => {
                             className={styles.tag}
                             shape={'rounded'}
                             size={'medium'}
-                            appearance={'outline'}
+                            appearance={'brand'} // todo parametrize
                             media={
                                 options.find((option) => option.id === optionToRender)?.imagesrc &&
                                 <Image

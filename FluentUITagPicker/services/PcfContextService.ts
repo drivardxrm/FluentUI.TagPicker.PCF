@@ -18,8 +18,10 @@ export class PcfContextService {
   instanceid:string;
   dataset : ComponentFramework.PropertyTypes.DataSet;
   context: ComponentFramework.Context<IInputs>;
-  entityname : string;
-  relationshipname : string;
+  targetEntityName: string;
+  targetEntityId: string;
+  relatedEntityName : string;
+  relationshipName : string;
   viewid : string;
   showRecordImage:boolean;
   
@@ -28,13 +30,18 @@ export class PcfContextService {
   constructor (props?:IPcfContextServiceProps) {
     if (props) {
       this.instanceid = props.instanceid
-      this.entityname = props.context.parameters.tagsDataSet.getTargetEntityType()
+      this.relatedEntityName = props.context.parameters.tagsDataSet.getTargetEntityType()
       this.context = props.context
       this.dataset = props.context.parameters.tagsDataSet
       this.showRecordImage = props.context.parameters.showRecordImage.raw === 'true'
 
-      this.relationshipname = (this.context as any).navigation._customControlProperties.descriptor.Parameters.RelationshipName
+      this.relationshipName = (this.context as any).navigation._customControlProperties.descriptor.Parameters.RelationshipName
       this.viewid = (this.context as any).navigation._customControlProperties.descriptor.Parameters.ViewId
+
+      this.targetEntityName = (<any>this.context.mode).contextInfo.entityTypeName
+      this.targetEntityId   = (<any>this.context.mode).contextInfo.entityId
+      console.log(this.targetEntityName)
+      console.log(this.targetEntityId)
     }
   }
 
@@ -139,6 +146,32 @@ export class PcfContextService {
     // }
   }
 
+  async associateRecord (targetEntity:string, targetEntityId:string, relatedEntity:string, relatedEntityId:string, relationshipName:string):Promise<void> {
+    const associateRequest = {
+      target: { entityType: targetEntity, id: targetEntityId },
+      relatedEntities: [
+          { entityType: relatedEntity, id: relatedEntityId }
+      ],
+      relationship: relationshipName,
+      getMetadata: function () { return { boundParameter: null, parameterTypes: {}, operationType: 2, operationName: "Associate" }; }
+    };
+
+    const response = await (this.context.webAPI as any).execute(associateRequest)
+    return response
+  }
+
+  async disAssociateRecord (targetEntity:string, targetEntityId:string, relatedEntityId:string, relationshipName:string):Promise<void> {
+    const disassociateRequest = {
+      target: { entityType: targetEntity, id: targetEntityId },
+      relatedEntityId : relatedEntityId,
+      relationship: relationshipName,
+      getMetadata: function () { return { boundParameter: null, parameterTypes: {}, operationType: 2, operationName: "Disassociate" }; }
+    };
+
+    const response = await (this.context.webAPI as any).execute(disassociateRequest)
+    return response
+  }
+
   // async openRecord (entityName:string,entityId:string):Promise<ComponentFramework.NavigationApi.OpenFormSuccessResponse> {
   //   return this.context.navigation.openForm(
   //     {
@@ -148,3 +181,21 @@ export class PcfContextService {
   //   )
   // }
 }
+
+
+// var disassociateRequest = {
+// 	target: { entityType: "opportunity", id: "1b59bdd6-0ce1-4dd6-9631-00e9c958ee5c" },
+// 	relatedEntityId : "ce26f03d-ba3f-ef11-a316-000d3af4e7b2",
+// 	relationship: "bhvr_Platform_Opportunity",
+// 	getMetadata: function () { return { boundParameter: null, parameterTypes: {}, operationType: 2, operationName: "Disassociate" }; }
+// };
+
+// Xrm.WebApi.execute(disassociateRequest).then(
+// 	function success(response) {
+// 		if (response.ok) {
+// 			console.log("Success");
+// 		}
+// 	}
+// ).catch(function (error) {
+// 	console.log(error.message);
+// });

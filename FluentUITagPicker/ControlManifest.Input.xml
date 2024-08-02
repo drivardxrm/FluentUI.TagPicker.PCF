@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="DR" constructor="FluentUITagPicker" version="0.0.2" display-name-key="FluentUITagPicker" description-key="FluentUITagPicker description" control-type="standard" >
+  <control namespace="DR" constructor="FluentUITagPicker" version="0.0.5" display-name-key="FluentUITagPicker" description-key="FluentUITagPicker description" control-type="standard" >
     <external-service-usage enabled="false">
     </external-service-usage>
     <data-set name="tagsDataSet" display-name-key="Tags Dataset">
