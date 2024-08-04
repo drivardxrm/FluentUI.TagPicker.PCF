@@ -24,4 +24,8 @@ The control uses [FluentUI v9](https://react.fluentui.dev/) Tag picker control f
 # Screenshots
 
 
+![image](https://github.com/user-attachments/assets/9d45fdb3-a65b-4233-81a2-eafda6ef26c7)
+
+
+
 ![Recording 2024-08-04 174220](https://github.com/user-attachments/assets/d99e1aeb-96c9-4f07-b3f1-b6da31eccbb6)
