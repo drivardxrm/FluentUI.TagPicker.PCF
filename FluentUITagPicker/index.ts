@@ -12,9 +12,6 @@ export class FluentUITagPicker implements ComponentFramework.StandardControl<IIn
 
     private _root: Root;
     private _props:IPcfContextServiceProps;
-    private _isDesignMode: boolean;
-    
-
 
     /**
      * Empty constructor.
@@ -36,10 +33,6 @@ export class FluentUITagPicker implements ComponentFramework.StandardControl<IIn
     {
         this._root = createRoot(container!);
 
-        //https://butenko.pro/2023/01/08/pcf-design-time-vs-run-time/
-        if (location.ancestorOrigins?.[0] === "https://make.powerapps.com") {
-            this._isDesignMode = true;
-        }
 
         this._props = {
             context: context,

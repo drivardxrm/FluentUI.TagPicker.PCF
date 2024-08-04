@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="DR" constructor="FluentUITagPicker" version="0.0.17" display-name-key="FluentUITagPicker" description-key="FluentUITagPicker description" control-type="standard" >
+  <control namespace="DR" constructor="FluentUITagPicker" version="0.0.20" display-name-key="FluentUITagPicker" description-key="FluentUITagPicker description" control-type="standard" >
     <external-service-usage enabled="false">
     </external-service-usage>
     <data-set name="tagsDataSet" display-name-key="Tags Dataset">
@@ -11,8 +11,11 @@
       <value name="true" display-name-key="true" description-key="True">true</value>     
     </property>
 
+
     <resources>
       <code path="index.ts" order="1"/>
+      <resx path="strings/FluentUITagPicker.1033.resx" version="1.0.0" />
+      <resx path="strings/FluentUITagPicker.1036.resx" version="1.0.0" />
       <!-- UNCOMMENT TO ADD MORE RESOURCES
       <css path="css/FluentUITagPicker.css" order="1" />
       <resx path="strings/FluentUITagPicker.1033.resx" version="1.0.0" />

@@ -45,16 +45,15 @@ const FluentUITagPicker = ():JSX.Element => {
         if (selectedOptions !== commitedOptions) {
             const optionsToAssociate = selectedOptions.filter(option => !commitedOptions.includes(option));
             optionsToAssociate.forEach(option => {
-                pcfcontext.associateRecord(pcfcontext.targetEntityName, pcfcontext.targetEntityId, pcfcontext.relatedEntityName, option, pcfcontext.relationshipName)
+              pcfcontext.associateRecord(pcfcontext.targetEntityName, pcfcontext.targetEntityId, pcfcontext.relatedEntityName, option, pcfcontext.relationshipName)
+              //TODO : add error handling
             })
 
             const optionsToDissacociate = commitedOptions.filter(option => !selectedOptions.includes(option));
             optionsToDissacociate.forEach(option => {
-                pcfcontext.disAssociateRecord(pcfcontext.targetEntityName, pcfcontext.targetEntityId, option, pcfcontext.relationshipName)
+              pcfcontext.disAssociateRecord(pcfcontext.targetEntityName, pcfcontext.targetEntityId, option, pcfcontext.relationshipName)
             })
             setComitedOptions(selectedOptions)
-
-            
         }
     }
     , [selectedOptions])
@@ -63,9 +62,13 @@ const FluentUITagPicker = ():JSX.Element => {
     query,
     options: options.map((option) => option.id),
     noOptionsElement: (
-      <TagPickerOption value="no-matches">
-        {pcfcontext.context.resources.getString('**no match**') || '**no match**'}
-      </TagPickerOption>
+      <>
+        {query.length > 0 && 
+          <TagPickerOption value="no-matches">
+            {pcfcontext.context.resources.getString('**no match**') || '**no match**'}
+          </TagPickerOption>}
+      </>
+      
     ),
     renderOption: (optionidToRender) => (
       <TagPickerOption

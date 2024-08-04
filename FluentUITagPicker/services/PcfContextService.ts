@@ -62,18 +62,6 @@ export class PcfContextService {
   }
 
 
-
-   // Get the list of fields to fetch
-   getAttributes (primaryid:string, primaryname:string, primaryimage:string):string[] {
-    const attributes:string[] = [primaryid, primaryname] // primaryid and primaryname is always fetched
-
-    // add primaryimage if needed
-    if (this.showRecordImage) {
-      attributes.push(primaryimage)
-    }
-    return attributes
-  }
-
   async getDatsetViewRecords (entityname:string, primaryid:string, primaryname:string, primaryimage:string, fetchxml:string, metadata:ComponentFramework.PropertyHelper.EntityMetadata) : Promise<ComponentFramework.WebApi.Entity[]> {
     const parser = new DOMParser()
     const fetchxmldoc = parser.parseFromString(fetchxml, 'text/xml')
@@ -85,8 +73,16 @@ export class PcfContextService {
     fetchxmldoc.querySelectorAll('attribute').forEach(el => el.remove())
     fetchxmldoc.querySelectorAll('link-entity[alias="dependent"]').forEach(el => el.remove())
 
+    const attributes:string[] = [primaryid, primaryname] // primaryid and primaryname is always fetched
+
+    // add primaryimage if needed
+    if (this.showRecordImage) {
+      attributes.push(primaryimage)
+    }
+
+
     // add attributes to fetchxml
-    this.getAttributes(primaryid, primaryname, primaryimage).forEach(attribute => {
+    attributes.forEach(attribute => {
       const customattribute = fetchxmldoc.createElement('attribute')
       customattribute.setAttribute('name', attribute)
       entityelement.appendChild(customattribute)
