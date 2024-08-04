@@ -10,6 +10,7 @@ The control uses [FluentUI v9](https://react.fluentui.dev/) Tag picker control f
   
 # Features:
 - Exposes records from the 'Default view' configured on the subgrid
+- Filter values enabled
 - Supports individual record images
 - Dark-mode aware
 
