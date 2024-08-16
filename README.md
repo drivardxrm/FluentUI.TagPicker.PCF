@@ -9,9 +9,9 @@ The control uses [FluentUI v9](https://react.fluentui.dev/?path=/docs/components
 [Download Here](https://github.com/drivardxrm/FluentUI.TagPicker.PCF/releases/latest)
   
 # Features:
-- Exposes records from the 'Default view' configured on the subgrid
-- Filter values enabled
+- Exposes records from the 'Default view' configured on the model-driven form subgrid
 - Supports individual record images
+- Filter values enabled
 - Dark-mode aware
 
 
