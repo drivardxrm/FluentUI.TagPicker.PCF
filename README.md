@@ -30,9 +30,18 @@ The control uses [FluentUI v9](https://react.fluentui.dev/?path=/docs/components
 
 # Screenshots
 
+**Filtering**
+
+![image](https://github.com/user-attachments/assets/c08e6463-436f-4209-8f34-c31cf48893de) 
+
+![image](https://github.com/user-attachments/assets/5712ca53-3967-4066-b82b-055af9ec0042)
+
+
+**Dark mode**
 
 ![image](https://github.com/user-attachments/assets/9d45fdb3-a65b-4233-81a2-eafda6ef26c7)
 
 
+**Control in action**
 
 ![Recording 2024-08-04 174220](https://github.com/user-attachments/assets/d99e1aeb-96c9-4f07-b3f1-b6da31eccbb6)
