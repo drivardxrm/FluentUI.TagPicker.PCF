@@ -24,8 +24,10 @@ The control uses [FluentUI v9](https://react.fluentui.dev/?path=/docs/components
 # Parameters
 | Parameter         | Description                                                                                  | Default     |
 |-------------------|----------------------------------------------------------------------------------------------|----------   |
-| Tags Dataset  | Dataset to Expose |             |
+| Tags Dataset  | Dataset to Expose |       Should be a N:N relationship subgrid      |
 | Show Record Image  | Show the record image beside the text. |             |
+
+![image](https://github.com/user-attachments/assets/1e6cd9cf-4a77-4229-a49a-5c375202b771)
 
 
 # Screenshots
