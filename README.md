@@ -17,7 +17,7 @@ The control uses [FluentUI v9](https://react.fluentui.dev/?path=/docs/components
 # Features:
 - Exposes records from the 'Default view' configured on the model-driven form subgrid
 - Supports individual record images
-- Filter values enabled
+- Filter values based on input text
 - Dark-mode aware
 
 
