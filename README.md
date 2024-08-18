@@ -15,17 +15,19 @@ PowerApps Component framework (PCF) Control that renders a **Tag Picker** out of
 The control uses [FluentUI v9](https://react.fluentui.dev/?path=/docs/components-tagpicker--default) Tag picker control from the Fluent2 design system.
 
 # Features:
-- Exposes records from the 'Default view' configured on the model-driven form subgrid
+- Exposes records from the subgrid 'Default view' 
 - Supports individual record images
-- Filter values enabled
+- Filter values based on input text
 - Dark-mode aware
 
 
 # Parameters
 | Parameter         | Description                                                                                  | Default     |
 |-------------------|----------------------------------------------------------------------------------------------|----------   |
-| Tags Dataset  | Dataset to Expose |             |
+| Tags Dataset  | Dataset to Expose |       Should be a N:N relationship subgrid      |
 | Show Record Image  | Show the record image beside the text. |             |
+
+![image](https://github.com/user-attachments/assets/1e6cd9cf-4a77-4229-a49a-5c375202b771)
 
 
 # Screenshots
