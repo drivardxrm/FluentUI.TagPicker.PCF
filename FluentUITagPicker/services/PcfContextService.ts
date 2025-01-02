@@ -29,13 +29,13 @@ export class PcfContextService {
 
   constructor (props?:IPcfContextServiceProps) {
     if (props) {
-      this.instanceid = props.instanceid
-      this.dataset = props.context.parameters.tagsDataSet
-      this.context = props.context
-      this.targetEntityName = (<any>this.context.mode).contextInfo.entityTypeName
-      this.targetEntityId   = (<any>this.context.mode).contextInfo.entityId
-      this.relatedEntityName = props.context.parameters.tagsDataSet.getTargetEntityType()
-      this.relationshipName = (<any>this.context).navigation._customControlProperties.descriptor.Parameters.RelationshipName
+      this.instanceid = props.instanceid;
+      this.dataset = props.context.parameters.tagsDataSet;
+      this.context = props.context;
+      this.targetEntityName = (this.context.mode as any).contextInfo.entityTypeName;
+      this.targetEntityId   = (this.context.mode as any).contextInfo.entityId;
+      this.relatedEntityName = props.context.parameters.tagsDataSet.getTargetEntityType();
+      this.relationshipName = (this.context as any).navigation._customControlProperties.descriptor.Parameters.RelationshipName
       this.viewid = (this.context as any).navigation._customControlProperties.descriptor.Parameters.ViewId
       this.showRecordImage = props.context.parameters.showRecordImage.raw === 'true'
 
@@ -114,7 +114,7 @@ export class PcfContextService {
       getMetadata: function () { return { boundParameter: null, parameterTypes: {}, operationType: 2, operationName: "Associate" }; }
     };
 
-    const response = await (<any>this.context.webAPI).execute(associateRequest)
+    const response = await (this.context.webAPI as any).execute(associateRequest)
     return response
   }
 
@@ -126,7 +126,7 @@ export class PcfContextService {
       getMetadata: function () { return { boundParameter: null, parameterTypes: {}, operationType: 2, operationName: "Disassociate" }; }
     };
 
-    const response = await (<any>this.context.webAPI).execute(disassociateRequest)
+    const response = await (this.context.webAPI as any).execute(disassociateRequest)
     return response
   }
 }
