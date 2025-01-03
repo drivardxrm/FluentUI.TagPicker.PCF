@@ -128,7 +128,7 @@ const FluentUITagPicker = (): JSX.Element => {
                             }).join(`
                             `);
 
-                            errorMessage = `There was an error adding the following record/s: 
+                            errorMessage = `${pcfcontext.context.resources.getString('There was an error adding the following record/s:') || 'There was an error adding the following record/s:'} 
                             ${errorString}`;
                         }
 
@@ -150,7 +150,8 @@ const FluentUITagPicker = (): JSX.Element => {
                             ${errorString}`;
                         }
 
-                        Xrm.Utility.alertDialog(errorMessage);
+                        const alertStrings = {  text: errorMessage };
+                        Xrm.Navigation.openAlertDialog(alertStrings);
 
                         setSelectedOptions(viableOptions);
                         setComitedOptions(viableOptions);

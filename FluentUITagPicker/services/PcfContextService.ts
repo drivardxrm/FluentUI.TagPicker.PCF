@@ -1,4 +1,3 @@
-import { Theme } from '@fluentui/react-components';
 import { IInputs } from '../generated/ManifestTypes'
 
 //https://www.inogic.com/blog/2020/12/get-subgrid-information-from-the-pcf-context/
@@ -38,9 +37,6 @@ export class PcfContextService {
       this.relationshipName = (this.context as any).navigation._customControlProperties.descriptor.Parameters.RelationshipName
       this.viewid = (this.context as any).navigation._customControlProperties.descriptor.Parameters.ViewId
       this.showRecordImage = props.context.parameters.showRecordImage.raw === 'true'
-
-      // console.log(this.targetEntityName)
-      // console.log(this.targetEntityId)
     }
   }
 

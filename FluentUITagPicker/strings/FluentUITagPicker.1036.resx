@@ -64,6 +64,9 @@
   <data name="Error fetching data..." xml:space="preserve">
     <value>Erreur lors de l'obtention des données...</value> 
   </data>
+  <data name="There was an error adding the following record/s:" xml:space="preserve">
+    <value>Une erreur est survenue pour les enregistrements suivants:</value> 
+  </data>
   <data name="**no match**" xml:space="preserve">
     <value>**aucune concordance**</value> 
   </data>

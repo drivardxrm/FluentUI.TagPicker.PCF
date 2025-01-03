@@ -64,6 +64,9 @@
   <data name="Error fetching data..." xml:space="preserve">
     <value>Error fetching data...</value> 
   </data>
+  <data name="There was an error adding the following record/s:" xml:space="preserve">
+    <value>There was an error adding the following record/s:</value> 
+  </data>
   <data name="**no match**" xml:space="preserve">
     <value>**no match**</value> 
   </data>
