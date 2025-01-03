@@ -128,7 +128,7 @@ const FluentUITagPicker = (): JSX.Element => {
                             }).join(`
                             `);
 
-                            errorMessage = `${pcfcontext.context.resources.getString('There was an error adding the following record/s:') || 'There was an error adding the following record/s:'} 
+                            errorMessage = `${pcfcontext.context.resources.getString('There was an error adding the following record:') || 'There was an error adding the following record:'} 
                             ${errorString}`;
                         }
 
@@ -146,7 +146,7 @@ const FluentUITagPicker = (): JSX.Element => {
                                 `;
                             }
 
-                            errorMessage += `There was an error removing the following record/s:
+                            errorMessage += `${pcfcontext.context.resources.getString('There was an error removing the following record:') || 'There was an error removing the following record:'} 
                             ${errorString}`;
                         }
 
