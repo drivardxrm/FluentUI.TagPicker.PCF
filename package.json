@@ -13,11 +13,11 @@
     "refreshTypes": "pcf-scripts refreshTypes"
   },
   "dependencies": {
-    "@fluentui/react-components": "^9.54.8",
-    "@tanstack/react-query": "^5.62.12",
+    "@fluentui/react-components": "^9.63.0",
+    "@tanstack/react-query": "^5.74.7",
     "react": "^18",
     "react-dom": "^18",
-    "uuid": "^11.0.3"
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@microsoft/eslint-plugin-power-apps": "^0.2.33",
@@ -35,6 +35,6 @@
     "pcf-start": "^1",
     "speed-measure-webpack-plugin": "^1.5.0",
     "typescript": "^4.9.5",
-    "@types/xrm": "^9.0.81"
+    "@types/xrm": "^9.0.86"
   }
 }

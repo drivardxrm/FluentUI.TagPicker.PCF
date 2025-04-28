@@ -3,37 +3,39 @@ import { IInputs } from '../generated/ManifestTypes'
 //https://www.inogic.com/blog/2020/12/get-subgrid-information-from-the-pcf-context/
 
 export interface IPcfContextServiceProps{
-  context: ComponentFramework.Context<IInputs>;
-  instanceid: string;
-  isDarkMode: boolean;
+  context: ComponentFramework.Context<IInputs>
+  instanceid: string
+  isDarkMode: boolean
 }
 
 export interface iTagInfo{
-  id: string;
-  name: string;
+  id: string
+  name: string
 }
 
 export class PcfContextService {
-  instanceid:string;
-  dataset : ComponentFramework.PropertyTypes.DataSet;
-  context: ComponentFramework.Context<IInputs>;
-  targetEntityName: string;
-  targetEntityId: string;
-  relatedEntityName : string;
-  relationshipName : string;
-  viewid : string;
-  showRecordImage:boolean;
+  instanceid:string
+  dataset : ComponentFramework.PropertyTypes.DataSet
+  context: ComponentFramework.Context<IInputs>
+  targetEntityName: string
+  targetEntityId: string
+  relatedEntityName : string
+  relationshipName : string
+  viewid : string
+  showRecordImage:boolean
+  isDisabled:boolean = false
   
   
 
   constructor (props?:IPcfContextServiceProps) {
     if (props) {
-      this.instanceid = props.instanceid;
-      this.dataset = props.context.parameters.tagsDataSet;
-      this.context = props.context;
-      this.targetEntityName = (this.context.mode as any).contextInfo.entityTypeName;
-      this.targetEntityId   = (this.context.mode as any).contextInfo.entityId;
-      this.relatedEntityName = props.context.parameters.tagsDataSet.getTargetEntityType();
+      this.instanceid = props.instanceid
+      this.dataset = props.context.parameters.tagsDataSet
+      this.context = props.context
+      this.targetEntityName = (this.context.mode as any).contextInfo.entityTypeName
+      this.targetEntityId   = (this.context.mode as any).contextInfo.entityId
+      this.isDisabled   = (this.context.mode as any).contextInfo.entityId === undefined
+      this.relatedEntityName = props.context.parameters.tagsDataSet.getTargetEntityType()
       this.relationshipName = (this.context as any).navigation._customControlProperties.descriptor.Parameters.RelationshipName
       this.viewid = (this.context as any).navigation._customControlProperties.descriptor.Parameters.ViewId
       this.showRecordImage = props.context.parameters.showRecordImage.raw === 'true'

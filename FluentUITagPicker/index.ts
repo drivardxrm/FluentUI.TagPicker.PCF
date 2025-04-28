@@ -37,7 +37,7 @@ export class FluentUITagPicker implements ComponentFramework.StandardControl<IIn
         this._props = {
             context: context,
             instanceid: uuidv4(),
-            isDarkMode: context.fluentDesignLanguage?.isDarkTheme ?? false,
+            isDarkMode: context.fluentDesignLanguage?.isDarkTheme ?? false
         }
 
     }

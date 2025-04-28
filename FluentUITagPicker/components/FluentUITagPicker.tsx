@@ -62,7 +62,7 @@ const FluentUITagPicker = (): JSX.Element => {
                     const associateActions = optionsToAssociate.map<Promise<AssociateDisassociateResult>>(option => {
                         return new Promise<AssociateDisassociateResult>(async (resolve, reject) => {
                             try {
-                                await pcfcontext.associateRecord(pcfcontext.targetEntityName, pcfcontext.targetEntityId, pcfcontext.relatedEntityName, option, pcfcontext.relationshipName)
+                                await pcfcontext.associateRecord(pcfcontext.targetEntityName, pcfcontext.targetEntityId!, pcfcontext.relatedEntityName, option, pcfcontext.relationshipName)
 
                                 resolve({
                                     action: AssociateDisassociateAction.associate,
@@ -87,7 +87,7 @@ const FluentUITagPicker = (): JSX.Element => {
                     const disassociateActions = optionsToDisassociate.map<Promise<AssociateDisassociateResult>>(option => {
                         return new Promise(async (resolve, reject) => {
                             try {
-                                await pcfcontext.disAssociateRecord(pcfcontext.targetEntityName, pcfcontext.targetEntityId, option, pcfcontext.relationshipName)
+                                await pcfcontext.disAssociateRecord(pcfcontext.targetEntityName, pcfcontext.targetEntityId!, option, pcfcontext.relationshipName)
 
                                 resolve({
                                     action: AssociateDisassociateAction.disassociate,
@@ -220,6 +220,7 @@ const FluentUITagPicker = (): JSX.Element => {
                         onOptionSelect={onOptionSelect}
                         selectedOptions={selectedOptions}
                         appearance={'filled-darker'}
+                        disabled={pcfcontext.isDisabled}
                     >
                         <TagPickerControl
                             className={styles.tagPickerControl}
