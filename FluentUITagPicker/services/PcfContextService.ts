@@ -34,7 +34,7 @@ export class PcfContextService {
       this.context = props.context
       this.targetEntityName = (this.context.mode as any).contextInfo.entityTypeName
       this.targetEntityId   = (this.context.mode as any).contextInfo.entityId
-      this.isDisabled   = (this.context.mode as any).contextInfo.entityId === undefined
+      this.isDisabled   = (this.context.mode as any).contextInfo.entityId === undefined || this.context.mode.isControlDisabled
       this.relatedEntityName = props.context.parameters.tagsDataSet.getTargetEntityType()
       this.relationshipName = (this.context as any).navigation._customControlProperties.descriptor.Parameters.RelationshipName
       this.viewid = (this.context as any).navigation._customControlProperties.descriptor.Parameters.ViewId
