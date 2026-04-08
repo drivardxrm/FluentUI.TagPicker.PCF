@@ -23,7 +23,7 @@ export class PcfContextService {
   relationshipName : string
   viewid : string
   showRecordImage:boolean
-  isDisabled:boolean = false
+  isDisabled:boolean
   
   
 

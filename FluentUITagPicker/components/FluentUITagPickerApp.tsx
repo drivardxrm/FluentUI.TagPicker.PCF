@@ -17,8 +17,7 @@ const queryClient = new QueryClient({
   }
 })
 
-// eslint-disable-next-line no-undef
-const FluentUITagPickerApp = (props:IPcfContextServiceProps): JSX.Element => {
+const FluentUITagPickerApp = (props:IPcfContextServiceProps): React.JSX.Element => {
   const pcfcontextservice = new PcfContextService(props)
 
   return (
