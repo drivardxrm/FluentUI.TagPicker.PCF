@@ -16,6 +16,7 @@ export class FluentUITagPicker implements ComponentFramework.StandardControl<IIn
     /**
      * Empty constructor.
      */
+    
     constructor()
     {
 

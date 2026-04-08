@@ -20,7 +20,7 @@ enum AssociateDisassociateAction {
     disassociate = 2,
 }
 
-const FluentUITagPicker = (): JSX.Element => {
+const FluentUITagPicker = (): React.JSX.Element => {
     const pcfcontext = usePcfContext()
     const { options, status, isFetching } = useTagPickerOptions()
     const [query, setQuery] = useState<string>("");
